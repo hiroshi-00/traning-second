@@ -1,0 +1,50 @@
+<header class="navbar navbar-expand-lg navbar-light bg-warning fixed-top">
+  <%= link_to 'いんすたぐらむ', root_path, class: "navbar-brand font-weight-bold" %>
+  <% if user_signed_in? %>
+    <%= current_user.username %>
+  <% end %>
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav ml-auto">
+      
+      <!--ログイン中の場合-->
+      <%  if user_signed_in?  %>
+        <%= form_tag "/tweets", method: "get", class: "form-inline my-2 my-lg-0" do %>
+          <%= text_field_tag :search, "", placeholder: "何かお探しですか？", class: "form-control mr-sm-2 rounded-pill"%>
+          <%= submit_tag "検索", class: "btn btn-outline-success my-2 my-sm-0 rounded-pill" %>
+        <% end %>
+        <li class="nav-item">
+          <%= link_to "ユーザー一覧", users_path, class: "nav-link font-weight-bold" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "呟き一覧", tweets_path, class: "nav-link font-weight-bold" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to current_user.username, user_path(current_user.id), class: "nav-link font-weight-bold" %>
+        </li>
+        <li class="nav-item">
+	        <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "nav-link font-weight-bold" %>
+        </li>
+      <!--ログインしていない場合-->
+      <% else %>
+        <li class="nav-item">
+          <%= link_to "新規登録", new_user_registration_path, class: "nav-link btn btn-success rounded-pill mx-3 px-3" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "ログイン", new_user_session_path, class: "nav-link btn btn-info rounded-pill px-3" %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</header>

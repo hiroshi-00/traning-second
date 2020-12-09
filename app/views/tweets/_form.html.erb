@@ -1,0 +1,53 @@
+<%= form_with(model: @tweet, local: true) do |f| %>
+
+  <div class="field form-group">
+    <%= f.label :title, "タイトル" %>
+    <%= f.text_field :title, 
+      autofocus: true,
+      autocpomplete: "title",
+      placeholder: "タイトル",
+      required: "",
+      class:"form-control" %>
+  </div>
+  
+  <div class="field form-group">
+    <%= f.label :time, "運動時間" %>
+    <%= f.number_field :time, 
+      autofocus: true,
+      autocpomplete: "time",
+      required: "",
+      class:"form-control" %>
+  </div>
+  
+  <div class="field form-group">
+    <%= f.label :my_height, "現在の身長" %>
+    <%= f.number_field :my_height, 
+      autofocus: true,
+      autocpomplete: "my_height",
+      class:"form-control" %>
+  </div>
+  
+  <div class="field form-group">
+    <%= f.label :my_weight, "現在の体重" %>
+    <%= f.number_field :my_weight, 
+      autofocus: true,
+      autocpomplete: "my_weight",
+      required: "",
+      class:"form-control" %>
+  </div>
+  
+   <div class="field form-group">
+    <%= f.label :body, "つぶやき" %>
+    <%= f.text_area :body,
+      autofocus: true,
+      autocpomplete: "body",
+      required: "",
+      rows: "5",
+      class:"form-control tweet-form" %>
+  </div>
+  
+  <div class="actions">
+    <%= f.submit class: "btn btn-primary" %>
+  </div>
+  
+<% end %>

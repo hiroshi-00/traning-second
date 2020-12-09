@@ -1,0 +1,28 @@
+<div class="card col-12">
+  <div class="card-body">
+    <% @chats.each do |chat| %>
+      <tr>
+        <div class = "row">
+          <% if @current_user.id == chat.user.id %>
+            <div class = "col">
+              <td class = "text-danger" ><%= chat.user.username %></td>
+              <td><%= chat.message %></td>
+            </div>
+          <% else %>
+            <div class = "col-12 d-flex justify-content-end">
+              <td><%= chat.message %></td>
+              <td><%= chat.user.username %></td>
+            </div>
+          <% end %>
+        </div>
+      </tr>
+    <% end %>
+  </div>
+  <div class = "col-12">
+    <%= form_with model: @chat do |f| %>
+      <%= f.text_field :message %>
+      <%= f.hidden_field :room_id %>
+      <%= f.submit %>
+    <% end %>
+  </div>
+</div>

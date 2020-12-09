@@ -1,0 +1,23 @@
+<div class = "row" >
+  <div class = "col-8">
+    <%= render @tweet %>
+  </div>
+  
+  <div class = "col-4">
+    <div class="card mb-3">
+      <div class="card-body">
+        <h5 class="card-title"><%= @tweet.user.username %>
+        <small class="card-title text-secondary"><%= @tweet.user.email %></small>
+        </h5>
+        <hr>
+        <h5 class="card-title"><%= @tweet.user.profile %></h5>
+        <% if user_signed_in? %>
+          <%= link_to user_path(@tweet.user) do %>
+            <%= @tweet.user.username %>さんのページへ
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+

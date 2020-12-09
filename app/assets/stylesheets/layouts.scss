@@ -1,0 +1,51 @@
+main {
+	min-height: calc(100vh - 60px);
+	overflow: hidden;
+	padding-top: 60px;
+	background-color: #e2e4e5;
+}
+
+header {
+	height: 60px;
+}
+
+footer {
+	height: 60px;
+}
+
+.users-profile {
+	box-shadow: 0 0 10px grey;
+}
+
+.my-profile {
+	background-color: #fff;
+}
+
+.my-profile-image {
+	margin: -0.50rem 0 !important;
+	position: relative;
+}
+
+.my-image {
+	position: absolute;
+	top: 0; right: 0; left: 0; bottom: 0;
+	object-fit: cover;
+	background-size: cover;
+	max-height: 100%;
+	width: 100%;
+	border-radius: 5px;
+	height: 100%;
+}
+
+.my-profile-textarea, .tweet-form{
+	resize: none;
+}
+
+.user-name {
+	position: relative;
+}
+
+.user-time {
+	position: absolute;
+	right: 0;
+}

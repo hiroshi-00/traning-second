@@ -1,0 +1,7 @@
+<h2 class = "my-3">呟き一覧</h2>
+
+<%= render @tweets %>
+
+<% if user_signed_in? %>
+  <%= link_to "新規投稿+", new_tweet_path, class: "btn btn-success rounded-pill" %>
+<% end %>

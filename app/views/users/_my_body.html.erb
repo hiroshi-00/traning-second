@@ -1,0 +1,68 @@
+<h1>体型グラフ</h1>
+<% if @user.tweets.present? %>
+  <canvas id="myLineChart"></canvas>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
+  
+  <script>
+  var ctx = document.getElementById("myLineChart");
+  
+  var myLineChart = new Chart(ctx, {
+      
+    type: 'line',
+    data: {
+      labels: <%= @datas.to_json.html_safe %>,
+      datasets: [
+        {
+          label: '身長',
+          data: <%= @height %>,
+          borderColor: "rgba(255,0,0,1)",
+          backgroundColor: "rgba(0,0,0,0)",
+          fill: false
+        },
+        {
+          label: '体重',
+          data: <%= @weight %>,
+          borderColor: "rgba(0,0,255,1)",
+          backgroundColor: "rgba(0,0,0,0)",
+          fill: false
+        },
+        {
+          label: '運動時間',
+          data: <%= @time %>,
+          borderColor: "rgba(255,105,0,1)",
+          backgroundColor: "rgba(0,0,0,0)",
+          fill: false
+        },
+        {
+          label: 'BMI',
+          data: <%= @bmi %>,
+          borderColor: "rgba(0,255,0,1)",
+          backgroundColor: "rgba(0,0,0,0)",
+          fill: false
+        }
+        
+      ],
+    },
+    options: {
+      title: {
+        display: true,
+        text: ''
+      },
+      scales: {
+        yAxes: [{
+          ticks: {
+            suggestedMax: 40,
+            suggestedMin: 0,
+            stepSize: 10,
+            callback: function(value, index, values){
+              return  value 
+            }
+          }
+        }]
+      },
+    }
+  });
+  </script>
+<% else %>
+  <p>データがまだ存在していません</p>
+<% end %>
