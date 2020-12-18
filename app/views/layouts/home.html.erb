@@ -13,16 +13,13 @@
   <body>
     <%= render "layouts/header" %>
     <main class = "top-image">
+      <img src="/assets/training.jpg">
       <div class = "container">
         <%= render "layouts/flash" %>
+        <%= render "layouts/about"%>
         <%= yield %>
       </div>
     </main>
-    <div class = "about d-flex align-items-center">
-      <div class = "container">
-        <%= render "layouts/about"%>
-      </div>
-    </div>
     <%= render "layouts/footer" %>
   </body>
 </html>

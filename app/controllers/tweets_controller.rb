@@ -59,14 +59,14 @@ class TweetsController < ApplicationController
         @tweets = Tweet.all
       end
     end
-    
+  
     # ツイッターAPI
     def twitter_client
       @client = Twitter::REST::Client.new do |config|
-        config.consumer_key         = ENV['CONSUMER_KEY']
-        config.consumer_secret      = ENV['CONSUMER_SECRET']
-        config.access_token         = ENV['ACCESS_TOKEN']
-        config.access_token_secret  = ENV['ACCESS_TOKEN_SECRET']
+        config.consumer_key         = '5Oq2MRyYMEaq8RaHX37ZL82jM'
+        config.consumer_secret      = 'EvwB70ypv57nde4XsfffZcse1cuNX6Q85EOrbx1Mn0kE9G2u1K'
+        config.access_token         = '1241191011038068736-8rNqdugqJ5gLHTUEdHejZuzqe1i7mW'
+        config.access_token_secret  = '2BrY11FexgEVu5omWFbn1v6z2wocUv1dO1KX8095v9EAv'
       end
     end
       

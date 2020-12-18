@@ -1,4 +1,6 @@
 class ChatsController < ApplicationController
+  before_action :authenticate_user!
+  
   def show
       # どのユーザーとチャットするかを取得。
       @user = User.find(params[:id])

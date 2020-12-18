@@ -10,10 +10,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # POST /resource
-  def create
-    logger.debug("====================== registrations create email = #{params[:user][:email]}")
-    super
-  end
+  # def create
+  #   logger.debug("====================== registrations create email = #{params[:user][:email]}")
+  #   super
+  # end
 
   # GET /resource/edit
   # def edit
@@ -44,12 +44,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_sign_up_params
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:username, :usertype, :prefectures])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:username, :usertype, :prefectures, :gender, :age, :image, :profile_image])
   end
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_account_update_params
-    devise_parameter_sanitizer.permit(:account_update, keys: [:username, :profile, :usertype, :prefecture])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:username, :profile, :usertype, :prefecture, :age, :image, :profile_image])
   end
 
 
@@ -65,6 +65,5 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # The path used after sign up for inactive accounts.
   # def after_inactive_sign_up_path_for(resource)
-    
   # end
 end

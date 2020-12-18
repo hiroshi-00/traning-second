@@ -1,6 +1,6 @@
 <% if @search.present? %>
     <%= @search %><span>の検索結果</span>
-    <%= "1-#{@products.count}件表示" %>
+    <%= "1-#{@tweets.count}件表示" %>
 <% else %>
   <%= render @tweets %>
 <% end %>

@@ -1,8 +1,22 @@
 <header class="navbar navbar-expand-lg navbar-light bg-warning fixed-top">
-  <%= link_to 'いんすたぐらむ', root_path, class: "navbar-brand font-weight-bold" %>
+  <%= link_to 'Trainig Memoz', root_path, class: "navbar-brand font-weight-bold header-name" %>
+  
   <% if user_signed_in? %>
-    <%= current_user.username %>
+    <%= link_to user_path(current_user.id), class: "nav-link" do %>
+      <% if current_user.image.present? %>
+        <div class="d-flex justify-content-start">
+          <%= image_tag current_user.image.url, class: "nav-icon nav-link" %>
+          <span class = "d-flex align-items-center"><%= current_user.username %></span>
+        </div>
+        <% else %>
+        <div class="d-flex justify-content-start">
+          <!--< image_tag('/kinnniku.png'), class: "nav-icon nav-link" %>-->
+          <span class = "d-flex align-items-center"><%= current_user.username %></span>
+        </div>
+      <% end %>
+    <% end %>
   <% end %>
+  
   <button
     class="navbar-toggler"
     type="button"
@@ -20,29 +34,29 @@
       
       <!--ログイン中の場合-->
       <%  if user_signed_in?  %>
-        <%= form_tag "/tweets", method: "get", class: "form-inline my-2 my-lg-0" do %>
+        <%= form_tag "/tweets", method: "get", class: "form-inline my-lg-0 bg-warning px-3" do %>
           <%= text_field_tag :search, "", placeholder: "何かお探しですか？", class: "form-control mr-sm-2 rounded-pill"%>
           <%= submit_tag "検索", class: "btn btn-outline-success my-2 my-sm-0 rounded-pill" %>
         <% end %>
         <li class="nav-item">
-          <%= link_to "ユーザー一覧", users_path, class: "nav-link font-weight-bold" %>
+          <%= link_to "ユーザー一覧", users_path, class: "nav-link font-weight-bold bg-warning px-3" %>
         </li>
         <li class="nav-item">
-          <%= link_to "呟き一覧", tweets_path, class: "nav-link font-weight-bold" %>
+          <%= link_to "投稿一覧", tweets_path, class: "nav-link font-weight-bold bg-warning px-3" %>
         </li>
         <li class="nav-item">
-          <%= link_to current_user.username, user_path(current_user.id), class: "nav-link font-weight-bold" %>
-        </li>
-        <li class="nav-item">
-	        <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "nav-link font-weight-bold" %>
+	        <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "nav-link font-weight-bold bg-warning px-3" %>
         </li>
       <!--ログインしていない場合-->
       <% else %>
-        <li class="nav-item">
-          <%= link_to "新規登録", new_user_registration_path, class: "nav-link btn btn-success rounded-pill mx-3 px-3" %>
+        <li class="nav-item active">
+          <%= link_to "お問い合わせ", home_contact_path, class: "nav-link bg-warning px-3" %>
         </li>
-        <li class="nav-item">
-          <%= link_to "ログイン", new_user_session_path, class: "nav-link btn btn-info rounded-pill px-3" %>
+        <li class="nav-item active">
+          <%= link_to "新規登録", new_user_registration_path, class: "nav-link bg-warning px-3" %>
+        </li>
+        <li class="nav-item active">
+          <%= link_to "ログイン", new_user_session_path, class: "nav-link bg-warning px-3" %>
         </li>
       <% end %>
     </ul>

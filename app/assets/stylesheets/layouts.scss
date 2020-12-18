@@ -2,7 +2,7 @@ main {
 	min-height: calc(100vh - 60px);
 	overflow: hidden;
 	padding-top: 60px;
-	background-color: #e2e4e5;
+	background-color: white;
 }
 
 header {
@@ -10,6 +10,7 @@ header {
 }
 
 footer {
+	background: lightgray;
 	height: 60px;
 }
 
@@ -49,3 +50,13 @@ footer {
 	position: absolute;
 	right: 0;
 }
+
+.nav-icon {
+  width: 65px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-right: -10px;
+}
+
+

@@ -6,13 +6,14 @@ Rails.application.routes.draw do
   }
   
   root 'home#index'
+  get 'home/contact' => 'home#contact'
   resources :users, only: [:index, :show] do
     resource :relationships, only: [:create, :destroy]
     get :follows, on: :member
     get :followers, on: :member
   end
   resources :tweets do
-    resources :searches,only:[:index]
+    resource :searches,only:[:index]
     resource :favorites, only: [:create, :destroy]
   end
   get 'chat/:id' => 'chats#show', as: 'chat'

@@ -1,12 +1,14 @@
 .top-image {
-  background-image: url(training.jpg);
-	background-size: cover;
-  background-repeat: no-repeat;
+  position: relative;
+}
+
+.top-image img {
+  display: inline-block;
+  width: 100%;
 }
 
 .about {
-  height: 400px;
-  background-color: lightgray;
+  background-color: white;
 }
 
 .column-one {
@@ -23,4 +25,17 @@
 
 .fas {
   font-size: 200%;
+}
+
+.signup-btn {
+	position: absolute;
+	top: 400px;
+}
+
+.catch-copy {
+  color: #d49f00;
+}
+
+.fab {
+  margin: 0 10px;
 }

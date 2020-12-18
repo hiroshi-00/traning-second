@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable, :omniauthable
+         :recoverable, :rememberable, :validatable,
+         :omniauthable, omniauth_providers: [:twitter, :google_oauth2]
 
   has_many :tweets  
   has_many :favorites
@@ -8,9 +9,7 @@ class User < ApplicationRecord
   has_many :chats
   has_many :user_rooms
   
-  has_many :tweets
-  has_many :favorites
-  has_many :favorite_tweets, through: :favorites, source: :tweet
+  mount_uploader :image, ImageUploader
 
   # ====================自分がフォローしているユーザーとの関連 ===================================
   #フォローする側のUserから見て、フォローされる側のUserを(中間テーブルを介して)集める。なので親はfollowing_id(フォローする側)
@@ -32,30 +31,26 @@ class User < ApplicationRecord
   end
   
   def following_by?(user)
-    # 今自分(引数のuser)がフォローしようとしているユーザー(レシーバー)がフォローされているユーザー(つまりpassive)の中から、引数に渡されたユーザー(自分)がいるかどうかを調べる
     active_relationships.find_by(follower_id: user.id).present?
   end
   
+
+  
   def self.find_for_oauth(auth)
-   user = User.where(uid: auth.uid, provider: auth.provider).first
-
-   unless user
-     user = User.create(
-       uid:      auth.uid,
-       provider: auth.provider,
-       email:    User.dummy_email(auth),
-       password: Devise.friendly_token[0, 20],
-       image: auth.info.image,
-       username: auth.info.name,
-       )
-   end
-
-   user
+    user = User.find_by(uid: auth.uid, provider: auth.provider)
+  
+    user ||= User.create!(
+      uid: auth.uid,
+      provider: auth.provider,
+      username: auth[:info][:username],
+      email: User.dummy_email(auth),
+      password: Devise.friendly_token[0, 20]
+    )
+  
+    user
   end
-
-  private
-
+  
   def self.dummy_email(auth)
-   "#{auth.uid}-#{auth.provider}@example.com"
+    "#{Time.now.strftime('%Y%m%d%H%M%S').to_i}-#{auth.uid}-#{auth.provider}@example.com"
   end
 end

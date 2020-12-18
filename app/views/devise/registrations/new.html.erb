@@ -22,10 +22,25 @@
       required: "", 
       class: "form-control" %>
   </div>
+  <div class="field form-group">
+    <%= f.label :image, 'アイコン' %><br>
+    <%= f.file_field :image %>
+  </div>
+  
+  
+  <div class="field form-group">
+    <%= f.label :gender, '性別' %><small class="p-1 btn-danger text-white rounded-pill">必須</small>
+    <%= f.select :gender, {'男性': 1, '女性': 2, '未選択': 3}, { include_blank: '選択してください'}, { class: 'form-control' , required: "", } %>
+  </div>
+  
+  <div class="field form-group">
+    <%= f.label :age, '歳' %><small class="p-1 btn-danger text-white rounded-pill">必須</small>
+    <%= f.select :age, {'10代': 1, '20代': 2, '30代': 3, '40代': 4, '50代': 5, '60代': 6, '70代': 7, '80代': 8, '90代': 9}, { include_blank: '選択してください'}, { class: 'form-control' , required: "", } %>
+  </div>
    
   <div class="field form-group">
-    <%= f.label :prefectures, "お住まい" %>
-    <%= f.collection_select :prefectures, Prefecture.all, :id, :name,{prompt: ""}, {class: "form-control"} %>
+    <%= f.label :prefectures, "お住まい" %><small class="p-1 btn-danger text-white rounded-pill">必須</small>
+    <%= f.collection_select :prefectures, Prefecture.all, :id, :name, {include_blank: '選択してください'}, {class: "form-control", required: ""} %>
     <!--<= f.select :prefectures, User.all.map { |user| [user.prefectures, user.id] }, { include_blank: '選択してください'}, { class: 'form-control' } %>-->
   </div>
 
@@ -51,9 +66,22 @@
   </div>
 
   <div>
-    <%= f.submit "Sign up", class: "btn btn-primary" %>
+    <div class = "container row mb-2">
+      <%= f.submit "Sign up", class: "btn btn-primary" %>
+      <%= link_to "Login", new_user_session_path, class: "btn btn-success mx-3" %>
+    </div>
+
+    <div class="text-center">または</div>
+    
+    <%= link_to user_twitter_omniauth_authorize_path do %>
+      <i class="fab fa-twitter fa-2x"></i>
+    <% end %>
+    
+    <%= link_to user_google_oauth2_omniauth_authorize_path do %>
+      <i class="fab fa-google fa-2x"></i>
+    <% end %>
   </div>
-  <%= link_to 'Twitterログイン', user_twitter_omniauth_authorize_path %>
+  
 <% end %>
 
-<%= render "devise/shared/links" %>
+
