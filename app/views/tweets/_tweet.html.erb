@@ -1,11 +1,20 @@
 <div class="card mb-3">
   <div class="card-body">
     <h5 class="card-title user-name">
-      <% if user_signed_in? %>
-        <%= link_to tweet.user.username, user_path(tweet.user) %>
-      <% else %>
-        <%= tweet.user.username %>
+      <%= link_to user_path(tweet.user.id), class: "nav-link mr-auto tweet-image" do %>
+        <% if tweet.user.image.present? %>
+          <div class="row">
+            <%= image_tag tweet.user.image.url, class: "nav-icon nav-link" %>
+            <span class = "d-flex align-items-center"><%= tweet.user.username %></span>
+          </div>
+          <% else %>
+          <div class="row">
+            <%= image_tag '/image/muscle_man.png', class: "nav-icon nav-link" %>
+            <span class = "d-flex align-items-center"><%= tweet.user.username %></span>
+          </div>
+        <% end %>
       <% end %>
+      
       <small class = "text-secondary user-time">更新日：<%= tweet.updated_at.strftime("%Y-%m-%d %H:%M")%></small>
     </h5>
     <p class="card-text"><%= tweet.title %></p>
@@ -13,18 +22,19 @@
     
     <!--indexの場合-->
     <% if request.path == "/tweets" %>
-      <p class="card-text"><%= simple_format truncate(tweet.body, length: 150, omission: ".....") %></p>
-      <%= link_to '続きを読む', tweet, class: "btn btn-outline-primary" %>
+      <p class="card-text"><%= simple_format truncate(tweet.body, length: 150) %></p>
+      <%= link_to '詳細を見る', tweet, class: "btn btn-outline-primary" %>
       
       <% if user_signed_in? %>
         <% if tweet.favorited_by?(current_user) %>
-          <p><span><%= image_tag 'good.png', class: 'nice-btn' %></span>
-            <%=link_to tweet.favorites.count, tweet_favorites_path(tweet.id), method: :delete %>
-          </p>
+          
+          <%=link_to tweet_favorites_path(tweet.id), method: :delete do %>
+            <i class="fas fa-heart"></i><%= tweet.favorites.count %>
+          <% end %>
         <% else %>
-          <p><span><%= image_tag 'no_good.png', class: 'nice-btn' %></span>
-            <%=link_to tweet.favorites.count, tweet_favorites_path(tweet.id), method: :post %>
-          </p>
+          <%=link_to tweet_favorites_path(tweet.id), method: :post do %>
+            <i class="fas fa-heart"></i><%= tweet.favorites.count %>
+          <% end %>
         <% end %>
       <% else %>
         <p><span>お気に入り数: </span><%= tweet.favorites.count %></p>
@@ -38,34 +48,32 @@
         <% end %>
       <% end %>
       
+      
+      
     <!--showの場合-->
     <% else %>
       <p class="card-text"><%= simple_format tweet.body %></p>
       
       <% if user_signed_in? %>
         <% if tweet.favorited_by?(current_user) %>
-          <p><span><%= image_tag 'good.png', class: 'nice-btn' %></span>
-            <%=link_to tweet.favorites.count, tweet_favorites_path(tweet.id), method: :delete %>
-          </p>
+          <%=link_to tweet_favorites_path(tweet.id), method: :delete do %>
+            <i class="fas fa-heart"></i><%= tweet.favorites.count %>
+          <% end %>
         <% else %>
-          <p><span><%= image_tag 'no_good.png', class: 'nice-btn' %></span>
-            <%=link_to tweet.favorites.count, tweet_favorites_path(tweet.id), method: :post %>
-          </p>
+          <%=link_to tweet_favorites_path(tweet.id), method: :post do %>
+            <i class="fas fa-heart"></i><%= tweet.favorites.count %>
+          <% end %>
         <% end %>
       <% else %>
         <p><span>お気に入り数: </span><%= tweet.favorites.count %></p>
       <% end %>
       
     <% end %>
-    <% if user_signed_in? %>
-      <!--ログインユーザーの場合-->
-      <% if tweet.user_id == current_user.id %>
-        <%= link_to '編集', edit_tweet_path(tweet), class: "btn btn-outline-primary" %>
-        <%= link_to '削除', tweet, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-outline-danger" %>
-      <% end %>
+    
+    <% if tweet.user_id == current_user.id %>
+      <%= link_to '編集', edit_tweet_path(tweet), class: "btn btn-outline-primary" %>
+      <%= link_to '削除', tweet, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-outline-danger" %>
     <% end %>
     <%= link_to "戻る", tweets_path, class: "btn btn-outline-dark" %>
   </div>
 </div>
-
-

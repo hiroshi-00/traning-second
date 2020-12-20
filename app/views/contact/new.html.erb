@@ -1,0 +1,38 @@
+<h2>お問い合わせ</h2>
+
+<%= form_with model: @contact, url: contact_create_path do |f| %>
+
+  <div class="field form-group">
+    <%= f.label :name, "名前" %>
+    <%= f.text_field :name, 
+      autofocus: true,
+      autocpomplete: "name",
+      placeholder: "タイトル",
+      required: "",
+      class:"form-control" %>
+  </div>
+  
+  <div class="field form-group">
+    <%= f.label :email, "メールアドレス" %>
+    <%= f.text_field :email, 
+      autofocus: true,
+      autocpomplete: "email",
+      required: "",
+      class:"form-control" %>
+  </div>
+  
+   <div class="field form-group">
+    <%= f.label :content, "お問い合わせ内容" %>
+    <%= f.text_area :content,
+      autofocus: true,
+      autocpomplete: "content",
+      required: "",
+      rows: "5",
+      class:"form-control" %>
+  </div>
+  
+  <div class="actions">
+    <%= f.submit "送信", class: "btn btn-primary" %>
+  </div>
+  
+<% end %>

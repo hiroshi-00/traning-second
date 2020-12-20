@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
+  PER = 10
   
   def index
     @users = User.all
@@ -7,9 +8,10 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @users = @user.tweets.page(params[:page]).per(PER)
     @favorite_tweets = @user.favorite_tweets
     
-    tweets = @user.tweets.pluck(:created_at, :my_height, :my_weight, :time)
+    tweets = @user.tweets.pluck(:updated_at, :my_height, :my_weight, :time)
     @datas = tweets.map(&:first)
     @height = tweets.map(&:second)
     @weight = tweets.map(&:third)
@@ -23,12 +25,10 @@ class UsersController < ApplicationController
         @aa = hhh.to_f / 100
       end
       weight.each do |www|
-        bbb = www / (@aa * @aa)
+        bbb = www.to_i / (@aa * @aa)
         @bmi.push(bbb.floor(1).to_f)
       end
     end
-    
-    
   end
 
   private 

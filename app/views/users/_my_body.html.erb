@@ -1,5 +1,5 @@
-<h1>体型グラフ</h1>
-<% if @user.tweets.present? %>
+<h2 class = "mt-2">体型グラフ</h2>
+<% if @users.present? %>
   <canvas id="myLineChart"></canvas>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
   
@@ -65,4 +65,5 @@
   </script>
 <% else %>
   <p>データがまだ存在していません</p>
+  <%= link_to "新規投稿+", new_tweet_path, class: "btn btn-success rounded-pill" %>
 <% end %>

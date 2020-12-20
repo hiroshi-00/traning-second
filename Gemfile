@@ -74,9 +74,6 @@ gem 'jquery-rails'
 # グラフ
 gem 'chart-js-rails', '~> 0.1.4'
 
-# ツイッター
-gem 'twitter'
-gem 'omniauth-twitter'
 
 # S3画像
 gem 'carrierwave'
@@ -84,4 +81,6 @@ gem 'fog-aws'
 
 gem 'dotenv-rails'
 
-gem 'omniauth-google-oauth2'
+# ページネーション追加
+gem 'kaminari', '~> 0.17.0'
+gem 'kaminari-bootstrap', '~> 3.0.1'

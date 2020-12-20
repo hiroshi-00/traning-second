@@ -1,28 +1,43 @@
 <div class="card col-12">
   <div class="card-body">
     <% @chats.each do |chat| %>
-      <tr>
-        <div class = "row">
-          <% if @current_user.id == chat.user.id %>
-            <div class = "col">
-              <td class = "text-danger" ><%= chat.user.username %></td>
-              <td><%= chat.message %></td>
-            </div>
-          <% else %>
-            <div class = "col-12 d-flex justify-content-end">
-              <td><%= chat.message %></td>
-              <td><%= chat.user.username %></td>
-            </div>
-          <% end %>
-        </div>
-      </tr>
-    <% end %>
-  </div>
-  <div class = "col-12">
-    <%= form_with model: @chat do |f| %>
-      <%= f.text_field :message %>
-      <%= f.hidden_field :room_id %>
-      <%= f.submit %>
+      
+      <div class = "row">
+        <% if @current_user.id == chat.user.id %>
+          <div class = "col">
+            <% if current_user.image.present? %>
+              <div class="row">
+                <%= image_tag current_user.image.url, class: "nav-icon nav-link" %>
+                <span class = "d-flex align-items-center"><%= current_user.username %></span>
+              </div>
+              <% else %>
+              <div class="row">
+                <%= image_tag '/image/muscle_man.png', class: "nav-icon nav-link" %>
+                <span class = "d-flex align-items-center"><%= current_user.username %></span>
+              </div>
+            <% end %>
+            <span><%= chat.message %></span>
+          </div>
+        <% else %>
+          <!--フォロワーのメッセージ-->
+          <div class = "col-12 d-flex justify-content-end">
+            
+            <% if chat.user.image.present? %>
+              <div class="row">
+                <span class = "d-flex align-items-center"><%= chat.user.username %></span>
+                <%= image_tag chat.user.image.url, class: "nav-icon nav-link" %>
+              </div>
+              <% else %>
+              <div class="row">
+                <span class = "d-flex align-items-center"><%= chat.user.username %></span>
+                <%= image_tag '/image/muscle_man.png', class: "nav-icon nav-link" %>
+              </div>
+            <% end %>
+          </div>
+          <span class = "ml-3"><%= chat.message %></span>
+        <% end %>
+      </div>
+      <hr>
     <% end %>
   </div>
 </div>

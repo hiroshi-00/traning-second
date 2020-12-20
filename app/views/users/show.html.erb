@@ -5,17 +5,6 @@
     </div>
     <div class="col-sm-7 my-profile">
       <div class="card-body text-center">
-        <h5 class="card-title"><%= @user.username %>
-          <% if current_user.usertype == 0 %>
-            <span class = "btn btn-dark rounded-circle">権</span>
-          <% elsif current_user.usertype == 1 %>
-            <span class = "btn btn-primary rounded-circle">一般</span>
-          <% else %>
-            <span class = "btn btn-success rounded-circle">有</span>
-          <% end %>
-          <small><p class="text-secondary"><%= @user.email %></p></small>
-        </h5>
-        
         <p class="card-text"><%= simple_format @user.profile %></p>
         
         <div class="row">
@@ -63,13 +52,11 @@
     <div class="nav nav-tabs" id="nav-tab" role="tablist">
       <a class="nav-item nav-link active" id="tweet-tab" data-toggle="tab" href="#tweet" role="tab" aria-controls="tweet" aria-selected="true">Tweet</a>
       <a class="nav-item nav-link" id="my_body-tab" data-toggle="tab" href="#my_body" role="tab" aria-controls="my_body" aria-selected="false">training</a>
-      <a class="nav-item nav-link" id="my-menu" data-toggle="tab" href="#my_menu" role="tab" aria-controls="my_menu" aria-selected="false">My Menu</a>
     </div>
   </nav>
   <div class="tab-content" id="nav-tabContent">
     <div class="tab-pane fade show active" id="tweet" role="tabpanel" aria-labelledby="tweet-tab"><%= render "users/my_tweet" %></div>
     <div class="tab-pane fade" id="my_body" role="tabpanel" aria-labelledby="my_body-tab"><%= render "users/my_body" %></div>
-    <div class="tab-pane fade" id="my_menu" role="tabpanel" aria-labelledby="my_menu"><%= render "users/my_menu" %></div>
   </div>
   
 </div>

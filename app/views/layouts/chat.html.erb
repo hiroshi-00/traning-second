@@ -10,9 +10,17 @@
   </head>
   <body>
     <%= render "layouts/header" %>
-    <main class="d-flex align-items-center">
+    <main class="d-flex align-items-bottom">
       <%= yield %>
     </main>
+    <div class = "col-12 text-center my-3">
+      <%= form_with model: @chat do |f| %>
+        <%= f.text_field :message, 
+        required: "" %>
+        <%= f.hidden_field :room_id %>
+        <%= f.submit "送信"%>
+      <% end %>
+    </div>
     <%= render "layouts/footer" %>
   </body>
 </html>

@@ -24,6 +24,7 @@ module RecipeGram
       Devise::PasswordsController.layout "devise"
       HomeController.layout "home"
       ChatsController.layout "chat"
+      ContactController.layout "devise"
     end
   end
 end

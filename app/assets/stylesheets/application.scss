@@ -8,8 +8,16 @@
   height: 30px;
 }
 
-.header-name {
+.header-name, .footer-name{
   font-family: 'Langar', cursive;
   font-size: 1.5rem !important;
 }
 
+
+#myLineChart {
+  margin-top: -30px;
+}
+
+.tweet-image {
+  margin-left: -20px;
+}
